@@ -1,6 +1,7 @@
 package dmit2015.restclient;
 
 // must update pom.xml to use lombok
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +13,12 @@ public class Student {
 
     // fields to store data (always private)
     // project lombok simplifies code from default getter/setter and uses @Getter/@Setter instead
-    @Getter @Setter
+//    @Getter @Setter
+    @NotBlank(message = "First Name value is required.")
     private String firstName;
 
-    @Getter @Setter
+//    @Getter @Setter
+    @NotBlank(message = "Last Name value is required.")
     private String lastName;
 
 //    // in C# we use Properties() to access private fields, in Java we have getters and setters (public access model)

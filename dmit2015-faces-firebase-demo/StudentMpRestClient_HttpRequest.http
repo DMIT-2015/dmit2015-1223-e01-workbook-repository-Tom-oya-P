@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
   "firstName": "Tom",
-  "lastName": "Phong"
+  "lastName": "Phone"
 }
 
 ### DELETE document - use this if you want to delete a document
