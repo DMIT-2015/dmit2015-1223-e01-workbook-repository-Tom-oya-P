@@ -40,10 +40,10 @@
                          paginator="true" rows="10"
                          paginatorPosition="bottom">
 
-                <p:column headerText="Property1">
+                <p:column headerText="First Name">
                     <h:outputText value="#{currentItem.value.firstName}"/>
                 </p:column>
-                <p:column headerText="Property2">
+                <p:column headerText="Last Name">
                     <h:outputText value="#{currentItem.value.lastName}"/>
                 </p:column>
 
@@ -53,17 +53,17 @@
                         <f:param name="editId" value="#{currentItem.key}"/>
                     </p:link>
 
-<!--                    |-->
+                    |
 
-<!--                    <p:link id="detailsLink" outcome="details" value="details">-->
-<!--                        <f:param name="editId" value="#{currentItem.key}"/>-->
-<!--                    </p:link>-->
+                    <p:link id="detailsLink" outcome="details" value="details">
+                        <f:param name="editId" value="#{currentItem.key}"/>
+                    </p:link>
 
-<!--                    |-->
+                    |
 
-<!--                    <p:link id="deleteLink" outcome="delete" value="delete">-->
-<!--                        <f:param name="editId" value="#{currentItem.key}"/>-->
-<!--                    </p:link>-->
+                    <p:link id="deleteLink" outcome="delete" value="delete">
+                        <f:param name="editId" value="#{currentItem.key}"/>
+                    </p:link>
                 </p:column>
 
             </p:dataTable>
