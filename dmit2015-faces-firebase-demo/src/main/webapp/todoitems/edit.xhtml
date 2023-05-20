@@ -18,6 +18,10 @@
 
     <ui:define name="maincontent">
 
+        <f:metadata>
+            <f:viewAction action="#{firebaseLoginSession.checkForToken}" />
+        </f:metadata>
+
         <h1>Edit TodoItem</h1>
 
         <p:messages id="messages"/>
