@@ -6,7 +6,7 @@ import org.junit.platform.suite.api.*;
 @SuiteDisplayName("JUnit 5 Platform Suite")
 @SelectPackages("ca.nait.dmit.domain")
 @IncludeClassNamePatterns(".*Test")
-@SelectClasses({CircleTest.class, RectangleTest.class})
+@SelectClasses({BMITest.class, ChineseZodiacTest.class})
 class AllUnitTests
 {
 // the class remains completely empty,
