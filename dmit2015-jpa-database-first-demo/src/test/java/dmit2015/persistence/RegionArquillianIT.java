@@ -211,10 +211,9 @@ public class RegionArquillianIT { // The class must be declared as public
 
     @Order(5)
     @ParameterizedTest
-    // TODO Change the value below
     @CsvSource(value = {
-            "primaryKey1",
-            "primaryKey2",
+            "60",
+            "70",
     })
     void deleteById_ExistingId_DeletedData(BigInteger regionId) throws SystemException, NotSupportedException {
         _beanManagedTransaction.begin();
@@ -238,10 +237,9 @@ public class RegionArquillianIT { // The class must be declared as public
 
     @Order(6)
     @ParameterizedTest
-    // TODO Change the value below
     @CsvSource(value = {
-            "primaryKey",
-            "primaryKey"
+            "0",
+            "99"
     })
     void findById_NonExistingId_IsEmpty(BigInteger regionId) {
         // Arrange and Act
@@ -256,18 +254,14 @@ public class RegionArquillianIT { // The class must be declared as public
 
     @Order(7)
     @ParameterizedTest
-    // TODO Change the value below
     @CsvSource(value = {
-            "Invalid Property1Value, Property2Value, Property3Value, ExpectedExceptionMessage",
-            "Property1Value, Invalid Property2Value, Property3Value, ExpectedExceptionMessage",
+            "null, Region Name cannot be blank.",
+            "       , Region Name cannot be blank.",
     }, nullValues = {"null"})
-    void create_beanValidation_shouldFail(String property1, String property2, String property3, String expectedExceptionMessage) throws SystemException, NotSupportedException {
+    void create_beanValidation_shouldFail(String regionName, String expectedExceptionMessage) throws SystemException, NotSupportedException {
         // Arrange
         Region newRegion = new Region();
-        // TODO Change the code below to set each property
-        // newRegion.setProperty1(property1);
-        // newRegion.setProperty2(property2);
-        // newRegion.setProperty3(property3);
+         newRegion.setRegionName(regionName);
 
         _beanManagedTransaction.begin();
         try {

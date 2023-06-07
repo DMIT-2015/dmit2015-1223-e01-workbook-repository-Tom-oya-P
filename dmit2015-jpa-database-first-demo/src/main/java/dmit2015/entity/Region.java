@@ -14,7 +14,7 @@ public class Region {
     @Column(name = "REGION_ID")
     private BigInteger regionId;
 
-    @NotBlank(message = "Region name cannot be blank.")
+    @NotBlank(message = "Region Name cannot be blank.")
     @Basic
     @Column(name = "REGION_NAME")
     private String regionName;
