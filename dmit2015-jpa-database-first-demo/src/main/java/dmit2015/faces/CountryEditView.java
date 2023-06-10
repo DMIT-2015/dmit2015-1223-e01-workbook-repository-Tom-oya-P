@@ -1,8 +1,11 @@
 package dmit2015.faces;
 
 import dmit2015.entity.Country;
+import dmit2015.entity.Region;
 import dmit2015.persistence.CountryRepository;
 
+import dmit2015.persistence.RegionRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.util.Faces;
@@ -16,6 +19,8 @@ import jakarta.inject.Named;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 
 @Named("currentCountryEditView")
@@ -36,13 +41,29 @@ public class CountryEditView implements Serializable {
     @Getter
     private Country existingCountry;
 
+    @Inject
+    private RegionRepository _regionRepository;
+
+    @NotNull(message = "Country region must be assigned")
+    @Getter @Setter
+    private BigInteger selectedRegionId;
+
+    @Getter
+    private List<Region> regionList;
+
     @PostConstruct
     public void init() {
         if (!Faces.isPostback()) {
+
+            regionList = _regionRepository.findAll();
+
             if (editId != null) {
                 Optional<Country> optionalCountry = _countryRepository.findById(editId);
                 if (optionalCountry.isPresent()) {
                     existingCountry = optionalCountry.get();
+
+                    selectedRegionId = existingCountry.getRegionId();
+
                 } else {
                     Faces.redirect(Faces.getRequestURI().substring(0, Faces.getRequestURI().lastIndexOf("/")) + "/index.xhtml");
                 }
@@ -55,6 +76,9 @@ public class CountryEditView implements Serializable {
     public String onUpdate() {
         String nextPage = "";
         try {
+            Region selectedRegion = _regionRepository.findById(selectedRegionId).orElseThrow();
+            existingCountry.setRegionsByRegionId(selectedRegion);
+
             _countryRepository.update(editId, existingCountry);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
