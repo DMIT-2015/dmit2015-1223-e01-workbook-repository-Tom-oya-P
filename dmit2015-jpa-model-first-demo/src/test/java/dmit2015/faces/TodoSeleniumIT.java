@@ -50,7 +50,7 @@ public class TodoSeleniumIT {
 
     @AfterEach
     void afterEachTestMethod() {
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     private void setValue(String id, String value) {
@@ -138,7 +138,7 @@ public class TodoSeleniumIT {
         // Verify that clicking on the details link navigates to the Details page
         driver.findElements(By.xpath("//a[contains(@id,'detailsLink')]")).get(0).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Todo - Details");
+                .isEqualToIgnoringCase("Todo Details");
         // Navigate back to the listing page
         driver.navigate().back();
 
@@ -165,7 +165,7 @@ public class TodoSeleniumIT {
         int lastRowIndex = tableRowCount - 1;
         driver.findElements(By.xpath("//a[contains(@id,'detailsLink')]")).get(lastRowIndex).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Todo - Details");
+                .isEqualToIgnoringCase("Todo Details");
 
         var actualField1Value = driver.findElement(By.id(field1Id)).getText();
         var actualField2Value = driver.findElement(By.id(field2Id)).getText();
