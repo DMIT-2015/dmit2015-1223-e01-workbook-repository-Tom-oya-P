@@ -100,7 +100,7 @@ public class TodoSeleniumIT {
     @Order(2)
     @ParameterizedTest
     @CsvSource({
-            "Demo Functional UI Web Testing with Selenium Web Driver, false"
+            "Demo Functional UI Web Testing with Selenium Web Driver,false"
     })
     void shouldList(String expectedLastRowColumnDescription, String expectedLastRowColumnCompleted) {
         // Open a browser and navigate to the page to list entities
@@ -153,7 +153,7 @@ public class TodoSeleniumIT {
     @Order(3)
     @ParameterizedTest
     @CsvSource({
-            "description, Demo Functional UI Web Testing with Selenium Web Driver, false",
+            "description,Demo Functional UI Web Testing with Selenium Web Driver,completed,false",
     })
     void shouldDetails(String field1Id, String field1Value, String field2Id, String field2Value) {
         // Open a browser and navigate to the page to list entities
@@ -167,8 +167,8 @@ public class TodoSeleniumIT {
         assertThat(driver.getTitle())
                 .isEqualToIgnoringCase("Todo - Details");
 
-        var actualField1Value = driver.findElement(By.id("field1Id")).getText();
-        var actualField2Value = driver.findElement(By.id("field2Id")).getText();
+        var actualField1Value = driver.findElement(By.id(field1Id)).getText();
+        var actualField2Value = driver.findElement(By.id(field2Id)).getText();
 //        var actualField3Value = driver.findElement(By.id("field3Id")).getText();
         assertThat(actualField1Value)
                 .isEqualToIgnoringCase(field1Value);
@@ -182,9 +182,9 @@ public class TodoSeleniumIT {
     @Order(4)
     @ParameterizedTest
     @CsvSource({
-            "description, Finished Selenium Web Driver Demo, completed, true",
+            "description, Finished Selenium Web Driver demo, completed, true",
     })
-    void shouldEdit(String field1Id, String field1Value, String field2Id, String field2Value, String field3Id, String field3Value) {
+    void shouldEdit(String field1Id, String field1Value, String field2Id, String field2Value) {
         // Open a browser and navigate to the page to list entities
         driver.get("http://localhost:8080/todos/index.xhtml");
         assertThat(driver.getTitle())
@@ -195,7 +195,7 @@ public class TodoSeleniumIT {
 
         driver.findElements(By.xpath("//a[contains(@id,'editLink')]")).get(lastRowIndex).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Edit Todo");
+                .isEqualToIgnoringCase("Todo - Edit");
 
         // Set the value for each form field
         setValue(field1Id, field1Value);
@@ -206,10 +206,10 @@ public class TodoSeleniumIT {
         driver.findElement(By.id("updateButton")).click();
 
         var wait = new WebDriverWait(driver, Duration.ofSeconds(11));
-        var facesMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-info-summary")));
+        var feedbackMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-info-summary")));
         assertThat(driver.getTitle())
                 .isEqualToIgnoringCase("Todo - List");
-        assertThat(facesMessages.getText())
+        assertThat(feedbackMessages.getText())
                 .containsIgnoringCase("Update was successful.");
     }
 
@@ -227,7 +227,7 @@ public class TodoSeleniumIT {
 
         driver.findElements(By.xpath("//a[contains(@id,'deleteLink')]")).get(lastRowIndex).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Delete Todo");
+                .isEqualToIgnoringCase("Todo - Delete");
 
         driver.findElement(By.id("deleteButton")).click();
 
@@ -237,10 +237,10 @@ public class TodoSeleniumIT {
         yesConfirmationButton.click();
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        var facesMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-info-summary")));
+        var feedbackMessages = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("ui-messages-info-summary")));
         assertThat(driver.getTitle())
                 .isEqualToIgnoringCase("Todo - List");
-        assertThat(facesMessages.getText())
+        assertThat(feedbackMessages.getText())
                 .containsIgnoringCase("Delete was successful.");
     }
 
