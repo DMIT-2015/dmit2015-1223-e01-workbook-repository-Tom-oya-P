@@ -8,4 +8,33 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
+<!--    Here is where you define all security restrictions and all that. Must configure pom.xml first. -->
+<!--    https://moodle.nait.ca/pluginfile.php/16632204/mod_resource/content/0/DMIT2015%20Jakarta%20EE%2010%20Security%20API.pdf-->
+    <security-constraint>
+        <display-name>Use HTTPS only</display-name>
+        <web-resource-collection>
+            <web-resource-name>sslResources</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>SalesResources</web-resource-name>
+            <url-pattern>/movies/create.xhtml</url-pattern>
+            <url-pattern>/movies/edit.html</url-pattern>
+            <url-pattern>/movies/delete.html</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+<!--            Need to define roll name in <security-role> -->
+            <role-name>Sales</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>Sales</role-name>
+    </security-role>
 </web-app>
