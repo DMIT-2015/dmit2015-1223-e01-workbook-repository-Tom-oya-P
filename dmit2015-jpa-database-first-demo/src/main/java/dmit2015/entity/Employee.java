@@ -1,5 +1,6 @@
 package dmit2015.entity;
 
+import jakarta.ejb.Local;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "EMPLOYEES", schema = "HR", catalog = "")
 public class Employee {
+
     @Id
     @Column(name = "EMPLOYEE_ID")
     private Integer employeeId;

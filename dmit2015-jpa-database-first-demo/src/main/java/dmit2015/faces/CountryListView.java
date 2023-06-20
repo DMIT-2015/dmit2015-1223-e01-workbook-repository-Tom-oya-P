@@ -26,7 +26,6 @@ public class CountryListView implements Serializable {
     @Getter
     private List<Country> countryList;
 
-
     @PostConstruct  // After @Inject is complete
     public void init() {
         try {

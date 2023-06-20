@@ -9,6 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "JOBS", schema = "HR", catalog = "")
 public class Job {
+
     @Id
     @Column(name = "JOB_ID")
     private String jobId;

@@ -2,7 +2,6 @@ package dmit2015.entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,9 +9,11 @@ import java.util.Objects;
 @Table(name = "JOB_HISTORY", schema = "HR", catalog = "")
 @IdClass(JobHistoryPK.class)
 public class JobHistory {
+
     @Id
     @Column(name = "EMPLOYEE_ID")
     private Integer employeeId;
+
     @Id
     @Column(name = "START_DATE")
     private LocalDate startDate;
@@ -26,10 +27,10 @@ public class JobHistory {
     @Column(name = "DEPARTMENT_ID", insertable=false, updatable=false)
     private Short departmentId;
     @ManyToOne
-    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "EMPLOYEE_ID", nullable = false)
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "EMPLOYEE_ID", nullable = false, insertable = false, updatable = false)
     private Employee employeesByEmployeeId;
     @ManyToOne
-    @JoinColumn(name = "JOB_ID", referencedColumnName = "JOB_ID", nullable = false)
+    @JoinColumn(name = "JOB_ID", referencedColumnName = "JOB_ID", nullable = false, insertable = false, updatable = false)
     private Job jobsByJobId;
     @ManyToOne
     @JoinColumn(name = "DEPARTMENT_ID", referencedColumnName = "DEPARTMENT_ID")

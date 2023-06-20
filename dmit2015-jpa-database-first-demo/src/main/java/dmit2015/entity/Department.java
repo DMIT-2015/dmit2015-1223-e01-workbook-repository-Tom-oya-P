@@ -8,6 +8,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "DEPARTMENTS", schema = "HR", catalog = "")
 public class Department {
+
     @Id
     @Column(name = "DEPARTMENT_ID")
     private Short departmentId;

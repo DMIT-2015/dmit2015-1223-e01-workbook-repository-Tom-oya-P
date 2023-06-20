@@ -35,13 +35,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 //		url="jdbc:oracle:thin:@localhost:1521/FREEPDB1",
 //		user="user2015",
 //		password="Password2015"),
+
 	@DataSourceDefinition(
 		name="java:app/datasources/oracleHrDS",
 		className="oracle.jdbc.pool.OracleDataSource",
 		url="jdbc:oracle:thin:@localhost:1521/FREEPDB1",
 		user="HR",
 		password="Password2015"),
-
+//
 //	@DataSourceDefinition(
 //		name="java:app/datasources/oracleOeDS",
 //		className="oracle.jdbc.pool.OracleDataSource",

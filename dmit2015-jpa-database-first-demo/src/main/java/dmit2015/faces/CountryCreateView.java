@@ -29,7 +29,7 @@ public class CountryCreateView {
     @Inject
     private RegionRepository _regionRepository;
 
-    @NotNull(message = "Country region must be assigned.")
+    @NotNull(message = "Country region must be assigned")
     @Getter @Setter
     private BigInteger selectedRegionId;
 
@@ -40,7 +40,7 @@ public class CountryCreateView {
     public void init() {
         try {
             regionList = _regionRepository.findAll();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             Messages.addGlobalError(ex.getMessage());
         }
     }
@@ -48,8 +48,10 @@ public class CountryCreateView {
     public String onCreateNew() {
         String nextPage = "";
         try {
-            Region selectedRegion = _regionRepository.findById(selectedRegionId).orElseThrow();
-            newCountry.setRegionsByRegionId(selectedRegion);
+            if (selectedRegionId != null) {
+                Region selectedRegion = _regionRepository.findById(selectedRegionId).orElseThrow();
+                newCountry.setRegionsByRegionId(selectedRegion);
+            }
 
             _countryRepository.add(newCountry);
             Messages.addFlashGlobalInfo("Create was successful. {0}", newCountry.getCountryId());

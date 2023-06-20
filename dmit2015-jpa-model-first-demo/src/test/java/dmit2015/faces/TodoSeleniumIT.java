@@ -50,7 +50,7 @@ public class TodoSeleniumIT {
 
     @AfterEach
     void afterEachTestMethod() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     private void setValue(String id, String value) {
@@ -138,7 +138,7 @@ public class TodoSeleniumIT {
         // Verify that clicking on the details link navigates to the Details page
         driver.findElements(By.xpath("//a[contains(@id,'detailsLink')]")).get(0).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Todo Details");
+                .isEqualToIgnoringCase("Todo - Details");
         // Navigate back to the listing page
         driver.navigate().back();
 
@@ -165,7 +165,7 @@ public class TodoSeleniumIT {
         int lastRowIndex = tableRowCount - 1;
         driver.findElements(By.xpath("//a[contains(@id,'detailsLink')]")).get(lastRowIndex).click();
         assertThat(driver.getTitle())
-                .isEqualToIgnoringCase("Todo Details");
+                .isEqualToIgnoringCase("Todo - Details");
 
         var actualField1Value = driver.findElement(By.id(field1Id)).getText();
         var actualField2Value = driver.findElement(By.id(field2Id)).getText();
@@ -182,9 +182,9 @@ public class TodoSeleniumIT {
     @Order(4)
     @ParameterizedTest
     @CsvSource({
-            "description, Finished Selenium Web Driver demo, completed, true",
+            "description, Finished Selenium Web Driver demo, completed, false",
     })
-    void shouldEdit(String field1Id, String field1Value, String field2Id, String field2Value) {
+    void shouldEdit(String descriptionId, String description, String completedId, boolean completed) {
         // Open a browser and navigate to the page to list entities
         driver.get("http://localhost:8080/todos/index.xhtml");
         assertThat(driver.getTitle())
@@ -198,9 +198,14 @@ public class TodoSeleniumIT {
                 .isEqualToIgnoringCase("Todo - Edit");
 
         // Set the value for each form field
-        setValue(field1Id, field1Value);
-        setValue(field2Id, field2Value);
-//        setValue(field3Id, field3Value);
+        setValue(descriptionId, description);
+        var completedCheckbox = driver.findElement(By.id(completedId));
+        if ((completedCheckbox.isSelected() && completed == false)
+                ||
+                (completedCheckbox.isSelected() == false && completed == true)
+        ) {
+            driver.findElement(By.id(completedId)).click();
+        }
 
         driver.manage().window().maximize();
         driver.findElement(By.id("updateButton")).click();

@@ -57,6 +57,7 @@ public class CountryArquillianIT { // The class must be declared as public
                 // .addAsLibraries(pomFile.resolve("org.eclipse:yasson:3.0.3").withTransitivity().asFile())
                 .addClass(ApplicationConfig.class)
                 .addClasses(Country.class, CountryRepository.class)
+                // TODO Add any additional libraries, packages, classes or resource files required
                 // .addClasses(ApplicationStartupListener.class)
                 .addPackage("dmit2015.entity")
                 .addAsResource("META-INF/persistence.xml")
@@ -140,7 +141,7 @@ public class CountryArquillianIT { // The class must be declared as public
         assertThat(existingCountry)
                 .isNotNull();
         assertThat(existingCountry.getCountryName())
-                .isEqualTo(countryName);
+             .isEqualTo(countryName);
         assertThat(existingCountry.getRegionId())
                 .isEqualTo(regionId);
 
@@ -171,7 +172,7 @@ public class CountryArquillianIT { // The class must be declared as public
             // Assert
             Optional<Country> optionalCountry = _countryRepository.findById(newCountry.getCountryId());
             assertThat(optionalCountry.isPresent())
-                    .isTrue();
+                 .isTrue();
 
         } catch (Exception ex) {
             fail("Failed to add entity with exception", ex.getMessage());

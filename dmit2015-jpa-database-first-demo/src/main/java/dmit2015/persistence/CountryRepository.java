@@ -50,10 +50,8 @@ public class CountryRepository {
         if (optionalCountry.isPresent()) {
             // Update only properties that is editable by the end user
             existingCountry = optionalCountry.orElseThrow();
-
             existingCountry.setCountryName(updatedCountry.getCountryName());
             existingCountry.setRegionsByRegionId(updatedCountry.getRegionsByRegionId());
-            // Entity property is set to updatable = false, so dont update RegionId.
 //            existingCountry.setRegionId(updatedCountry.getRegionId());
 
             updatedCountry = _entityManager.merge(existingCountry);
@@ -78,12 +76,10 @@ public class CountryRepository {
         Optional<Country> optionalCountry = findById(countryId);
         if (optionalCountry.isPresent()) {
             Country existingCountry = optionalCountry.orElseThrow();
-
-            // refer to official HR schema docs
-            if(existingCountry.getLocationsByCountryId().size() > 0){
-                throw new RuntimeException("This country cannot be deleted as it is reference by existing locations.");
+            // Write code to throw a RuntimeException if this entity contains child records
+            if (existingCountry.getLocationsByCountryId().size() > 0) {
+                throw new RuntimeException("This country cannot be deleted as it is referenced by existing locations.");
             }
-
             _entityManager.remove(existingCountry);
         }
     }

@@ -55,7 +55,6 @@ public class RegionRepository {
         if (optionalRegion.isPresent()) {
             // Update only properties that is editable by the end user
             existingRegion = optionalRegion.orElseThrow();
-
             existingRegion.setRegionName(updatedRegion.getRegionName());
 
             updatedRegion = _entityManager.merge(existingRegion);
@@ -80,11 +79,9 @@ public class RegionRepository {
         Optional<Region> optionalRegion = findById(regionId);
         if (optionalRegion.isPresent()) {
             Region existingRegion = optionalRegion.orElseThrow();
-
-            if(existingRegion.getCountriesByRegionId().size() > 0){
+            if (existingRegion.getCountriesByRegionId().size() > 0) {
                 throw new RuntimeException("This region cannot be deleted as it is referenced by existing countries.");
             }
-
             _entityManager.remove(existingRegion);
         }
     }

@@ -50,8 +50,6 @@ public class TodoRepository {
         if (optionalTodo.isPresent()) {
             // Update only properties that is editable by the end user
             existingTodo = optionalTodo.orElseThrow();
-
-            // IMPORTANT - YOU MUST MANUALLY ADD PROPERTIES TO UPDATE HERE! USUALLY THIS IS WHY EDIT DOESNT WORK BUT IT SAYS UPDATE SUCCESSFUL!
             existingTodo.setDescription(updatedTodo.getDescription());
             existingTodo.setCompleted(updatedTodo.isCompleted());
 

@@ -11,14 +11,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "COUNTRIES", schema = "HR", catalog = "")
 public class Country {
+
     @Pattern(regexp = "^[a-zA-Z]{2}$")
     @Id
     @Column(name = "COUNTRY_ID")
     private String countryId;
 
-    @NotBlank(message = "Country name cannot be blank.")
+    @NotBlank(message = "Country Name cannot be blank.")
     @Basic
-    @Column(name = "COUNTRY_NAME")
+    @Column(name = "COUNTRY_NAME", length = 60)
     private String countryName;
     @Basic
     @Column(name = "REGION_ID", insertable=false, updatable=false)

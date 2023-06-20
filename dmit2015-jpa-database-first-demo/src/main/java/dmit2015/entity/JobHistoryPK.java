@@ -1,23 +1,19 @@
 package dmit2015.entity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class JobHistoryPK implements Serializable {
     @Column(name = "EMPLOYEE_ID")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
     @Column(name = "START_DATE")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Date startDate;
+    private LocalDate startDate;
 
     public Integer getEmployeeId() {
         return employeeId;
@@ -27,11 +23,11 @@ public class JobHistoryPK implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 

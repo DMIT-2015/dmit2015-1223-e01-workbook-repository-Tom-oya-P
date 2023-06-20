@@ -10,6 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "REGIONS", schema = "HR", catalog = "")
 public class Region {
+
     @Id
     @Column(name = "REGION_ID")
     private BigInteger regionId;
