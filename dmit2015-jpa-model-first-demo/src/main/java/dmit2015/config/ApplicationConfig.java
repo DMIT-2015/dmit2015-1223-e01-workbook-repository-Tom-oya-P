@@ -25,6 +25,7 @@ import jakarta.security.enterprise.identitystore.LdapIdentityStoreDefinition;
 )
 @DataSourceDefinitions({
 
+//        With an H2 Database, you dont need to run any docker container.
         @DataSourceDefinition(
                 name = "java:app/datasources/h2databaseDS",
                 className = "org.h2.jdbcx.JdbcDataSource",
