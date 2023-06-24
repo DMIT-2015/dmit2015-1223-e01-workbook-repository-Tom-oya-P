@@ -8,6 +8,8 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
+<!--    Here is where you define all security restrictions and all that. Must configure pom.xml first. -->
+<!--    https://moodle.nait.ca/pluginfile.php/16632204/mod_resource/content/0/DMIT2015%20Jakarta%20EE%2010%20Security%20API.pdf-->
     <security-constraint>
         <display-name>Use HTTPS only</display-name>
         <web-resource-collection>
@@ -23,10 +25,11 @@
         <web-resource-collection>
             <web-resource-name>SalesResources</web-resource-name>
             <url-pattern>/movies/create.xhtml</url-pattern>
-            <url-pattern>/movies/edit.xhtml</url-pattern>
-            <url-pattern>/movies/delete.xhtml</url-pattern>
+            <url-pattern>/movies/edit.html</url-pattern>
+            <url-pattern>/movies/delete.html</url-pattern>
         </web-resource-collection>
         <auth-constraint>
+<!--            Need to define roll name in <security-role> -->
             <role-name>Sales</role-name>
         </auth-constraint>
     </security-constraint>
@@ -34,30 +37,4 @@
     <security-role>
         <role-name>Sales</role-name>
     </security-role>
-
-    <error-page>
-        <error-code>401</error-code>
-        <location>/errorpages/401.xhtml</location>
-    </error-page>
-    <error-page>
-        <error-code>403</error-code>
-        <location>/errorpages/403.xhtml</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/errorpages/404.xhtml</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/errorpages/500.xhtml</location>
-    </error-page>
-    <error-page>
-        <exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
-        <location>/errorpages/expired.xhtml</location>
-    </error-page>
-    <error-page>
-        <exception-type>org.apache.shiro.authz.UnauthenticatedException</exception-type>
-        <location>/shiroLogin.xhtml</location>
-    </error-page>
-
 </web-app>

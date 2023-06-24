@@ -14,9 +14,8 @@ import jakarta.security.enterprise.identitystore.LdapIdentityStoreDefinition;
                 errorPage=""
         )
 )
-
 @LdapIdentityStoreDefinition(
-        url = "ldap://192.168.101.136:389",
+        url = "ldap://192.168.202.138:389",
         callerSearchBase = "ou=Departments,dc=dmit2015,dc=ca",
         callerNameAttribute = "SamAccountName", // SamAccountName or UserPrincipalName
         groupSearchBase = "ou=Departments,dc=dmit2015,dc=ca",
@@ -24,9 +23,9 @@ import jakarta.security.enterprise.identitystore.LdapIdentityStoreDefinition;
         bindDnPassword = "Password2015",
         priority = 5
 )
-
 @DataSourceDefinitions({
 
+//        With an H2 Database, you dont need to run any docker container.
         @DataSourceDefinition(
                 name = "java:app/datasources/h2databaseDS",
                 className = "org.h2.jdbcx.JdbcDataSource",

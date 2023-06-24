@@ -1,11 +1,10 @@
 package dmit2015.faces;
 
-import dmit2015.entity.Movie;
-import dmit2015.persistence.MovieRepository;
+import dmit2015.entity.Todo;
+import dmit2015.persistence.TodoRepository;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -19,15 +18,14 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Optional;
 
-@Named("currentMovieDeleteView")
+@Named("currentTodoDeleteView")
 @ViewScoped
-@RequiresRoles("IT")
-public class MovieDeleteView implements Serializable {
+public class TodoDeleteView implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private MovieRepository _movieRepository;
+    private TodoRepository _todoRepository;
 
     @Inject
     @ManagedProperty("#{param.editId}")
@@ -36,13 +34,13 @@ public class MovieDeleteView implements Serializable {
     private Long editId;
 
     @Getter
-    private Movie existingMovie;
+    private Todo existingTodo;
 
     @PostConstruct
     public void init() {
-        Optional<Movie> optionalMovie = _movieRepository.findById(editId);
-        if (optionalMovie.isPresent()) {
-            existingMovie = optionalMovie.get();
+        Optional<Todo> optionalTodo = _todoRepository.findById(editId);
+        if (optionalTodo.isPresent()) {
+            existingTodo = optionalTodo.get();
         } else {
             Faces.redirect(Faces.getRequestURI().substring(0, Faces.getRequestURI().lastIndexOf("/")) + "/index.xhtml");
         }
@@ -51,11 +49,11 @@ public class MovieDeleteView implements Serializable {
     public String onDelete() {
         String nextPage = "";
         try {
-            _movieRepository.delete(existingMovie);
+            _todoRepository.delete(existingTodo);
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
-        } catch (RuntimeException ex) {
-            Messages.addGlobalWarn(ex.getMessage());
+        } catch (RuntimeException e) {
+            Messages.addGlobalError(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Delete not successful.");

@@ -6,7 +6,6 @@ import dmit2015.persistence.MovieRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.shiro.authz.annotation.RequiresUser;
 import org.omnifaces.util.Messages;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -33,7 +32,6 @@ public class MovieCreateView {
 
     }
 
-    @RequiresUser
     public String onCreateNew() {
         String nextPage = "";
         try {
