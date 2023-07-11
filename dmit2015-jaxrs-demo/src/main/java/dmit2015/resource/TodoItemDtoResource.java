@@ -124,7 +124,10 @@ public class TodoItemDtoResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(errorMessage).build();
         }
 
-        todoItemRepository.update(mapFromDto(dto));
+        TodoItem existingTodoItem = optionalTodoItem.orElseThrow();
+        existingTodoItem.setName(dto.getName());
+        existingTodoItem.setComplete(dto.isComplete());
+        todoItemRepository.update(existingTodoItem);
 
         return Response.ok(dto).build();
     }
@@ -157,11 +160,14 @@ public class TodoItemDtoResource {
     }
 
     private TodoItemDto mapToDto(TodoItem todoItem) {
-        return new TodoItemDto(todoItem.getId(), todoItem.getName(), todoItem.isComplete(), todoItem.getVersion());
+        return new TodoItemDto(todoItem.getId(),
+                todoItem.getName(),
+                todoItem.isComplete(),
+                todoItem.getVersion());
     }
 
     private TodoItem mapFromDto(TodoItemDto dto) {
-        return new TodoItem(dto.getId(), dto.getName(), dto.isComplete());
+        return new TodoItem(dto.getId(), dto.getName(), dto.isComplete(), dto.getVersion());
     }
 
 }

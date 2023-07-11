@@ -13,4 +13,5 @@ public class TodoItemRepository extends AbstractJpaRepository<TodoItem, Long> {
         super(TodoItem.class);
     }
 
+
 }
