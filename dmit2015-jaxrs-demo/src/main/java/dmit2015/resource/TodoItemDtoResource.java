@@ -71,7 +71,7 @@ public class TodoItemDtoResource {
     private TodoItemRepository todoItemRepository;
 
     @POST   // POST: restapi/TodoItemsDto
-    public Response postTodoItem(@Valid TodoItemDto dto) {
+    public Response postTodoItem(TodoItemDto dto) {
         if (dto == null) {
             throw new BadRequestException();
         }

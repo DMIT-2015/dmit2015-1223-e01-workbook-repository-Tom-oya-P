@@ -45,10 +45,21 @@
             <p:panel id="formPanel" header="Form Panel">
                 <div class="ui-fluid">
 
-                    <!--                    <div class="field">-->
-                    <!--                        <p:outputLabel for="@next" >Text Value</p:outputLabel>-->
-                    <!--                        <p:inputText id="textValue" value="TODO Faces EL"/>-->
-                    <!--                    </div>-->
+                    <div class="field">
+                        <p:outputLabel for="@next" >City</p:outputLabel>
+                        <p:inputText id="city" value="#{currentOpenWeatherApiClientView.city}"/>
+                    </div>
+
+                    <div class="formgroup-inline">
+                        <div class="field">
+                            <p:commandButton value="Submit"
+                                             update=":messages "
+                                             action="#{currentOpenWeatherApiClientView.doSearchByCity()}"
+                            >
+                            </p:commandButton>
+                        </div>
+                    </div>
+
                     <!--                    <div class="field col-12 md:col-3">-->
                     <!--                        <p:outputLabel for="@next" value="Select One Value"/>-->
                     <!--                        <p:selectOneMenu id="option" value="TODO Faces EL">-->
@@ -86,23 +97,6 @@
                     <!--                        >-->
                     <!--                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />-->
                     <!--                        </p:datePicker>-->
-                    <!--                    </div>-->
-
-                    <!--                    <div class="formgroup-inline">-->
-                    <!--                        <div class="field">-->
-                    <!--                            <p:commandButton value="Submit"-->
-                    <!--                                             update=":messages "-->
-                    <!--                            >-->
-                    <!--                            </p:commandButton>-->
-                    <!--                        </div>-->
-
-                    <!--                        <div class="field">-->
-                    <!--                            <p:commandButton value="Clear"-->
-                    <!--                                             update="@form :outputPanel"-->
-                    <!--                                             styleClass="ui-button-secondary"-->
-                    <!--                            >-->
-                    <!--                            </p:commandButton>-->
-                    <!--                        </div>-->
                     <!--                    </div>-->
 
                 </div>
