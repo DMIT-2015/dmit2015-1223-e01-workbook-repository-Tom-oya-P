@@ -1,0 +1,7 @@
+### Start a batchlet to import all the data from the CSV file to our database
+
+# curl -i -X POST http://localhost:8080/restapi/batch-jobs/batchletEnforcementZoneCentre
+POST http://localhost:8080/restapi/batch-jobs/batchletEnforcementZoneCentre
+
+###
+
