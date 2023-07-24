@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.time.LocalDateTime;
 
+import jakarta.json.bind.annotation.JsonbNillable;
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Column;
@@ -107,6 +109,8 @@ public class EnforcementZoneCentre implements Serializable {
 	/**
 	 * The combined latitude/longitude values used to geo locate the centre of the enforcement zone for mapping purposes
 	 */
+	// jsonbtransient means when convert to json object, dont include this property
+	@JsonbTransient
 	private Point geoLocation;
 
     @Column(nullable = false)
