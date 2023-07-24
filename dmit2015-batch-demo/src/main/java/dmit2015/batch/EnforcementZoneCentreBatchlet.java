@@ -1,7 +1,7 @@
 package dmit2015.batch;
 
-import dmit2015.entity.EnforcementZoneCentre;
 
+import dmit2015.entity.EnforcementZoneCentre;
 import jakarta.batch.api.AbstractBatchlet;
 import jakarta.batch.api.BatchProperty;
 import jakarta.batch.runtime.context.JobContext;
@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 @Dependent
 public class EnforcementZoneCentreBatchlet extends AbstractBatchlet {
 
-    @PersistenceContext// (unitName = "mssql-jpa-pu")
+    @PersistenceContext//(unitName = "mssql-jpa-pu")
     private EntityManager _entityManager;
 
     @Inject
